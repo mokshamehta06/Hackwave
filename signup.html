@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sign Up | MCODE</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .input-error {
+      border: 1px solid #e74c3c !important;
+      background-color: #2c0e13 !important;
+    }
+
+    .error-message {
+      color: #e74c3c;
+      font-size: 0.85rem;
+      text-align: left;
+      margin-top: 5px;
+      padding-left: 5px;
+      font-weight: 500;
+      animation: fadeIn 0.3s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-5px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body class="login-body">
+  <div class="login-container">
+    <h1 class="login-title">Create Account</h1>
+    <form class="login-form" id="signupForm" novalidate>
+      <div class="form-group">
+        <input type="text" id="name" placeholder="Full Name" />
+        <small class="error-message" id="nameError"></small>
+      </div>
+      <div class="form-group">
+        <input type="email" id="email" placeholder="Email Address" />
+        <small class="error-message" id="emailError"></small>
+      </div>
+      <div class="form-group">
+        <input type="password" id="password" placeholder="Password" />
+        <small class="error-message" id="passwordError"></small>
+      </div>
+      <div class="form-group">
+        <input type="password" id="confirmPassword" placeholder="Confirm Password" />
+        <small class="error-message" id="confirmPasswordError"></small>
+      </div>
+      <button type="submit" class="login-btn">Sign Up</button>
+      <p class="signup-text">Already have an account? <a href="login.html">Login</a></p>
+    </form>
+  </div>
+
+  <script>
+    document.getElementById("signupForm").addEventListener("submit", function (event) {
+      event.preventDefault();
+
+      // Inputs
+      const name = document.getElementById("name");
+      const email = document.getElementById("email");
+      const password = document.getElementById("password");
+      const confirmPassword = document.getElementById("confirmPassword");
+
+      // Error elements
+      const nameError = document.getElementById("nameError");
+      const emailError = document.getElementById("emailError");
+      const passwordError = document.getElementById("passwordError");
+      const confirmPasswordError = document.getElementById("confirmPasswordError");
+
+      // Clear previous errors
+      [nameError, emailError, passwordError, confirmPasswordError].forEach(el => el.textContent = "");
+      [name, email, password, confirmPassword].forEach(input => input.classList.remove("input-error"));
+
+      let isValid = true;
+
+      // Name validation (only alphabets and spaces allowed)
+      const namePattern = /^[A-Za-z\s]+$/;
+      if (name.value.trim().length < 2) {
+        nameError.textContent = "Please enter your full name.";
+        name.classList.add("input-error");
+        isValid = false;
+      } else if (!namePattern.test(name.value.trim())) {
+        nameError.textContent = "Name can only contain letters and spaces.";
+        name.classList.add("input-error");
+        isValid = false;
+      }
+
+      // Email validation
+      const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailPattern.test(email.value.trim())) {
+        emailError.textContent = "Please enter a valid email address.";
+        email.classList.add("input-error");
+        isValid = false;
+      }
+
+      // Password validation
+      if (password.value.trim().length < 6) {
+        passwordError.textContent = "Password must be at least 6 characters.";
+        password.classList.add("input-error");
+        isValid = false;
+      }
+
+      // Confirm password validation
+      if (confirmPassword.value !== password.value) {
+        confirmPasswordError.textContent = "Passwords do not match.";
+        confirmPassword.classList.add("input-error");
+        isValid = false;
+      }
+
+      // If valid
+      if (isValid) {
+        alert("Signup successful! (This is a demo.)");
+        // this.submit(); // Uncomment to submit to server
+      }
+    });
+  </script>
+</body>
+</html>

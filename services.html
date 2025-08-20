@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Services | MCODE</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #0a0a0a, #1a1a2e, #2f2f70);
+      color: #fff;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 20px;
+    }
+
+    .services-container {
+      max-width: 1000px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 25px;
+      animation: fadeIn 1.2s ease-in-out;
+    }
+
+    .service-card {
+      background: rgba(255, 255, 255, 0.05);
+      padding: 30px;
+      border-radius: 20px;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      text-align: center;
+    }
+
+    .service-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.6);
+    }
+
+    .service-card h2 {
+      margin-bottom: 15px;
+      font-size: 1.5rem;
+      color: #c9a0ff;
+    }
+
+    .service-card p {
+      font-size: 1rem;
+      color: #ccc;
+      line-height: 1.5;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+  <h1 style="text-align:center; margin-bottom: 30px; background: linear-gradient(135deg,#a855f7,#ff4d6d); -webkit-background-clip:text; -webkit-text-fill-color:transparent;">Our Services</h1>
+
+  <div class="services-container">
+    <div class="service-card">
+      <h2>Web Development</h2>
+      <p>Building responsive, modern, and scalable websites tailored to your business needs.</p>
+    </div>
+    <div class="service-card">
+      <h2>Mobile Apps</h2>
+      <p>High-performance mobile applications for both Android and iOS platforms.</p>
+    </div>
+    <div class="service-card">
+      <h2>AI & Automation</h2>
+      <p>Smart AI-driven solutions to automate workflows and boost efficiency.</p>
+    </div>
+    <div class="service-card">
+      <h2>UI/UX Design</h2>
+      <p>Beautiful, user-friendly designs that enhance user experience and engagement.</p>
+    </div>
+  </div>
+</body>
+</html>

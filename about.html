@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About | MCODE</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #0a0a0a, #1a1a2e, #2f2f70);
+      color: #fff;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .about-section {
+      text-align: center;
+      padding: 60px 20px;
+    }
+
+    .about-section h1 {
+      font-size: 2.8rem;
+      font-weight: 700;
+      color: #c9a0ff;
+      margin-bottom: 20px;
+    }
+
+    .about-section p {
+      max-width: 700px;
+      margin: 0 auto 40px;
+      font-size: 1.2rem;
+      color: #ddd;
+    }
+
+    .about-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      padding: 20px;
+      max-width: 1100px;
+      margin: auto;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 15px;
+      padding: 30px;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.6);
+    }
+
+    .card h2 {
+      font-size: 1.6rem;
+      margin-bottom: 15px;
+      color: #b983ff;
+    }
+
+    .card p {
+      font-size: 1rem;
+      color: #ccc;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      margin-top: auto;
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(10px);
+      font-size: 0.9rem;
+    }
+
+    footer span {
+      color: #ff4d6d;
+    }
+  </style>
+</head>
+<body>
+  <section class="about-section">
+    <h1>About <span style="color:#a855f7;">MCODE</span></h1>
+    <p>We build modern, creative, and futuristic web solutions 🚀 that empower businesses and individuals to grow digitally.</p>
+
+    <div class="about-cards">
+      <div class="card">
+        <h2>Our Vision</h2>
+        <p>To create impactful digital solutions that combine design, technology, and creativity to inspire growth worldwide.</p>
+      </div>
+      <div class="card">
+        <h2>Our Mission</h2>
+        <p>Deliver cutting-edge web platforms with sleek UI/UX, making technology simple, accessible, and futuristic.</p>
+      </div>
+      <div class="card">
+        <h2>Our Values</h2>
+        <p>Innovation, Transparency, and User-Centric design are at the heart of everything we build.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    © 2025 MCODE | Built with <span>❤</span> by Moksha
+  </footer>
+</body>
+</html>
