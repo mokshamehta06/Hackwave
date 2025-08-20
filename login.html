@@ -5,56 +5,98 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Login | MCODE</title>
   <link rel="stylesheet" href="style.css" />
+
   <style>
     /* Add error styling if not already in style.css */
-    /* Input error styles */
-.input-error {
-  border: 2px solid #e74c3c !important;
-  background-color: rgba(231, 76, 60, 0.08) !important;
-  box-shadow: 0 0 6px rgba(231, 76, 60, 0.6);
-  transition: 0.3s ease-in-out;
-}
-/* Error message styling */
-.error-message {
-  color: #ff6b6b;
-  font-size: 0.9rem;
-  font-weight: 500;
-  margin-top: 5px;
-  display: block;
-  opacity: 0;
-  transform: translateY(-3px);
-  transition: all 0.3s ease;
-}
-
-/* Show error with smooth fade-in */
-.input-error + .error-message {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* Inputs (normal state) */
-.login-form input {
-  width: 100%;
-  padding: 12px 14px;
-  border-radius: 8px;
-  border: 1px solid #ccc;
-  background: #1a1a2e;
-  color: #fff;
-  font-size: 1rem;
-  outline: none;
-  transition: 0.3s ease;
-}
-
-.login-form input:focus {
-  border-color: #6c63ff;
-  box-shadow: 0 0 8px rgba(108, 99, 255, 0.6);
-}
-
+    .input-error {
+      border: 2px solid #e74c3c !important;
+      background-color: rgba(231, 76, 60, 0.08) !important;
+      box-shadow: 0 0 6px rgba(231, 76, 60, 0.6);
+      transition: 0.3s ease-in-out;
+    }
+    .error-message {
+      color: #ff6b6b;
+      font-size: 0.9rem;
+      font-weight: 500;
+      margin-top: 5px;
+      display: block;
+      opacity: 0;
+      transform: translateY(-3px);
+      transition: all 0.3s ease;
+    }
+    .input-error + .error-message {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .login-form input {
+      width: 100%;
+      padding: 12px 14px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      background: #1a1a2e;
+      color: #fff;
+      font-size: 1rem;
+      outline: none;
+      transition: 0.3s ease;
+    }
+    .login-form input:focus {
+      border-color: #6c63ff;
+      box-shadow: 0 0 8px rgba(108, 99, 255, 0.6);
+    }
+    /* Google button wrapper */
+    .google-login {
+      margin-top: 20px;
+      text-align: center;
+    }
+    .google-btn {
+      background: #4285f4;
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      width: 100%;
+      transition: background 0.3s ease;
+    }
+    .google-btn:hover {
+      background: #357abd;
+    }
+    .google-btn img {
+      width: 20px;
+      height: 20px;
+    }
+    .divider {
+      margin: 20px 0;
+      text-align: center;
+      position: relative;
+    }
+    .divider::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: #ccc;
+    }
+    .divider span {
+      background: #16213e;
+      padding: 0 15px;
+      color: #ccc;
+      font-size: 14px;
+    }
   </style>
 </head>
 <body class="login-body">
   <div class="login-container">
     <h1 class="login-title">Welcome Back</h1>
+
+    <!-- Normal Email/Password Login -->
     <form class="login-form" id="loginForm" novalidate>
       <div class="form-group">
         <input type="email" id="email" placeholder="Email" />
@@ -65,21 +107,32 @@
         <small class="error-message" id="passwordError"></small>
       </div>
       <button type="submit" class="login-btn">Login</button>
-      <p class="signup-text">Don’t have an account? <a href="signup.html">Sign Up</a></p>
+      <p class="signup-text">Don't have an account? <a href="signup.html">Sign Up</a></p>
     </form>
+
+    <div class="divider">
+      <span>OR</span>
+    </div>
+
+    <!-- Google Sign In Button -->
+    <div class="google-login">
+      <button class="google-btn" onclick="signInWithGoogle()">
+        <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTgiIGhlaWdodD0iMTgiIHZpZXdCb3g9IjAgMCAxOCAxOCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTE3LjY0IDkuMjA0NTVDMTcuNjQgOC41NjY0IDE3LjU4MjcgNy45NTI3MyAxNy40NzI3IDcuMzYzNjRIMTlWMTBIMTcuNjRWOS4yMDQ1NVoiIGZpbGw9IiNGQjQwMzEiLz4KPHBhdGggZD0iTTkgMTguMDAwMUMxMS40MyAxOC4wMDAxIDEzLjQ2NzMgMTcuMTk0NSAxNC45NTQ1IDE1LjY5NTVMMTIuNjgxOCAxMy42MjI3QzExLjk4MTggMTQuMjkyNyAxMS4wMjcyIDE0LjcyNzMgOS45OTk5NSAxNC43MjczQzcuNjU5MDkgMTQuNzI3MyA1LjcyNzI3IDEzLjEwOTEgNS4wNzI3MyAxMC45MDkxTDEuNjM2MzYgMTIuNzI3M0MyLjM2MzY0IDE1LjQ1NDUgNC41NDU0NSAxNy41NDU1IDkgMTcuNTQ1NUwxNy42NCA5LjIwNDU1QzE3LjY0IDguNTY2NCAxNy41ODI3IDcuOTUyNzMgMTcuNDcyNyA3LjM2MzY0SDE5VjEwSDE3LjY0VjkuMjA0NTVaIiBmaWxsPSIjMzRBODUzIi8+CjxwYXRoIGQ9Ik01LjA3MjczIDEwLjkwOTFDNC45MDkwOSAxMC4zMTgxIDQuODE4MTggOS43MDQ1NSA0LjgxODE4IDkuMDkwOTFDNC44MTgxOCA4LjQ3NTQ1IDQuOTA5MDkgNy44NjE4MSA1LjA3MjczIDcuMjcwOTFMMS42MzYzNiA1LjQ1NDU1QzEuMjI3MjcgNi40NTQ1NSAxIDcuNTQ1NDUgMSA4LjY4MTgxQzEgOS44MTgxOCAxLjIyNzI3IDEwLjkwOTEgMS42MzYzNiAxMS45MDkxTDUuMDcyNzMgMTAuOTA5MVoiIGZpbGw9IiNGQkJDMDQiLz4KPHBhdGggZD0iTTkgMy4yNzI3M0MxMC40NTQ1IDMuMjcyNzMgMTEuNzI3MyAzLjgxODE4IDEyLjY4MTggNC43MjcyN0wxNC45NTQ1IDIuNjk1NDVDMTMuNDY3MyAxLjE5NDU1IDExLjQzIDAuMzYzNjM2IDkgMC4zNjM2MzZDNC41NDU0NSAwLjM2MzYzNiAyLjM2MzY0IDIuNDU0NTUgMS42MzYzNiA1LjE4MTgyTDUuMDcyNzMgNy4wMDAwQzUuNzI3MjcgNC44MDAwIDcuNjU5MDkgMy4yNzI3MyA5IDMuMjcyNzNaIiBmaWxsPSIjRUE0MzM1Ii8+Cjwvc3ZnPgo=" alt="Google">
+        Sign in with Google
+      </button>
+    </div>
   </div>
 
   <script>
+    // Normal Form Validation
     document.getElementById("loginForm").addEventListener("submit", function(event) {
       event.preventDefault();
 
-      // Elements
       const emailInput = document.getElementById("email");
       const passwordInput = document.getElementById("password");
       const emailError = document.getElementById("emailError");
       const passwordError = document.getElementById("passwordError");
 
-      // Clear previous errors
       emailError.textContent = "";
       passwordError.textContent = "";
       emailInput.classList.remove("input-error");
@@ -89,27 +142,45 @@
       const password = passwordInput.value.trim();
 
       let isValid = true;
+      const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-      // Email validation
-      const emailPattern = /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/;
       if (!emailPattern.test(email)) {
         emailError.textContent = "Please enter a valid email address.";
         emailInput.classList.add("input-error");
         isValid = false;
       }
-
-      // Password validation
       if (password.length < 6) {
         passwordError.textContent = "Password must be at least 6 characters.";
         passwordInput.classList.add("input-error");
         isValid = false;
       }
-
-      // If valid
       if (isValid) {
         alert("Login successful! (This is a demo.)");
-        // this.submit(); // Uncomment when backend is connected
       }
+    });
+
+    // Google Sign In Function
+    function signInWithGoogle() {
+      // Redirect to backend OAuth endpoint
+      // This will allow account switching by opening Google's OAuth flow
+      window.location.href = 'http://localhost:5000/auth/google';
+    }
+
+    // Check if user is already authenticated
+    window.addEventListener('load', function() {
+      fetch('http://localhost:5000/auth/user', {
+        credentials: 'include'
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.user) {
+          // User is already logged in, redirect to dashboard
+          window.location.href = 'http://localhost:3000/dashboard';
+        }
+      })
+      .catch(error => {
+        console.log('User not authenticated');
+      });
     });
   </script>
 </body>

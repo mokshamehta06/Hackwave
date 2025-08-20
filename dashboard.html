@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dashboard | MCODE</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .dashboard-container {
+      max-width: 800px;
+      margin: 50px auto;
+      padding: 30px;
+      background: #1a1a2e;
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    }
+    .welcome-message {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    .user-info {
+      background: #16213e;
+      padding: 20px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+    }
+    .logout-btn {
+      background: #e74c3c;
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: background 0.3s ease;
+    }
+    .logout-btn:hover {
+      background: #c0392b;
+    }
+    .loading {
+      text-align: center;
+      color: #ccc;
+    }
+  </style>
+</head>
+<body class="login-body">
+  <div class="dashboard-container">
+    <div class="welcome-message">
+      <h1>Welcome to Dashboard</h1>
+      <p>You have successfully logged in!</p>
+    </div>
+    
+    <div id="userInfo" class="user-info">
+      <div class="loading">Loading user information...</div>
+    </div>
+    
+    <div style="text-align: center;">
+      <button class="logout-btn" onclick="logout()">Logout</button>
+    </div>
+  </div>
+
+  <script>
+    // Check authentication status
+    window.addEventListener('load', function() {
+      fetch('http://localhost:5000/auth/user', {
+        credentials: 'include'
+      })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Not authenticated');
+        }
+        return response.json();
+      })
+      .then(data => {
+        if (data.user) {
+          displayUserInfo(data.user);
+        } else {
+          window.location.href = 'login.html';
+        }
+      })
+      .catch(error => {
+        console.error('Authentication error:', error);
+        window.location.href = 'login.html';
+      });
+    });
+
+    function displayUserInfo(user) {
+      const userInfoDiv = document.getElementById('userInfo');
+      userInfoDiv.innerHTML = `
+        <h3>User Information</h3>
+        <p><strong>Name:</strong> ${user.displayName || 'N/A'}</p>
+        <p><strong>Email:</strong> ${user.email || 'N/A'}</p>
+        <p><strong>Google ID:</strong> ${user.googleId || 'N/A'}</p>
+        ${user.photo ? `<img src="${user.photo}" alt="Profile" style="width: 50px; height: 50px; border-radius: 50%; margin-top: 10px;">` : ''}
+      `;
+    }
+
+    function logout() {
+      fetch('http://localhost:5000/auth/logout', {
+        credentials: 'include'
+      })
+      .then(() => {
+        window.location.href = 'login.html';
+      })
+      .catch(error => {
+        console.error('Logout error:', error);
+        window.location.href = 'login.html';
+      });
+    }
+  </script>
+</body>
+</html>
